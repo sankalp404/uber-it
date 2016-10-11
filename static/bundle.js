@@ -52031,7 +52031,7 @@
 	      var main = state.main;
 	      var start_day = main.startDate.format('DD/MM/YYYY');
 	      var end_day = main.endDate.format('DD/MM/YYYY');
-	      url = '/dropoffs?start_day=' + start_day + '&end_day=' + end_day + '&start_hour=' + start_hour + '&end_hour=' + end_hour + '&start_min=' + start_minute + '&end_min=' + end_minute + '&lat=' + lats.join(',') + '&lng=' + longs.join(',');
+	      url = '/dropoffs?start_day=' + start_day + '&end_day=' + end_day + '&start_hour=' + start_hour + '&end_hour=' + end_hour + '&start_min=' + start_minute + '&end_min=' + end_minute + '&lats=' + lats.join(',') + '&lngs=' + longs.join(',');
 	    } else {
 	      var _state = getState();
 	      var _main = _state.main;
@@ -52053,10 +52053,10 @@
 	      dispatch(fetchedDropOffs({
 	        dropoffs: response.outputs.map(function (item, index) {
 	          return {
-	            title: "" + index,
+	            title: "Ranking:" + index,
 	            animation: google.maps.Animation.DROP,
 	            showInfo: false,
-	            infoContent: "" + index,
+	            infoContent: "Total Dropoffs:" + item["count"],
 	            marker_type: 'dropoffs',
 	            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
 	            position: _extends({}, item, {
@@ -52114,12 +52114,12 @@
 	      dispatch(fetchedPickups({
 	        pickups: response.outputs.map(function (item, index) {
 	          return {
-	            title: "" + index,
+	            title: "Ranking:" + index,
 	            animation: google.maps.Animation.DROP,
 	            showInfo: false,
-	            infoContent: "" + index,
+	            infoContent: "Total Pickups" + item["count"],
 	            marker_type: 'pickups',
-	            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+	            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
 	            position: _extends({}, item, {
 	              lat: parseFloat(item["lat"]),
 	              lng: parseFloat(item["lng"])
@@ -54117,16 +54117,19 @@
 	        displayMarkers = displayMarkers.concat(markers.dropoffs);
 	      }
 	
+	      var start = (0, _moment2.default)("2014-4-1");
+	      var end = (0, _moment2.default)("2014-9-30");
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_dates2.default, {
 	          numberOfMonths: 1,
+	          showClearDates: true,
 	          reopenPickerOnClearDates: true,
 	          onOutsideClick: true,
 	          displayFormat: 'MMM D, YYYY',
 	          isOutsideRange: function isOutsideRange(day) {
-	            return !(0, _reactDates.isInclusivelyAfterDay)(day, startDate) || (0, _reactDates.isInclusivelyAfterDay)(day, endDate);
+	            return !(0, _reactDates.isInclusivelyAfterDay)(day, start) || (0, _reactDates.isInclusivelyAfterDay)(day, end);
 	          },
 	          onDatesChange: this.props.onDatesChange,
 	          startDate: startDate,
@@ -54347,13 +54350,13 @@
 	          TOGGLEDRAWING ? _react2.default.createElement(_DrawingManager2.default, {
 	            defaultDrawingMode: null,
 	            onCirclecomplete: function onCirclecomplete(entity) {
-	              console.log(entity.getBounds());
-	              //custom_fucn(entity.getBounds,"circle")
+	              // Todo
 	            },
 	            onRectanglecomplete: function onRectanglecomplete(entity) {
 	              if (_this2.rectangle) {
 	                _this2.rectangle.setMap(null);
 	              }
+	
 	              console.log(entity);
 	              _this2.rectangle = entity;
 	              console.log(entity.getBounds());

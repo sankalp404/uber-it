@@ -35,18 +35,19 @@ class Root extends Component{
       displayMarkers = displayMarkers.concat(markers.dropoffs);
     }
 
-    const startDate = moment("2014-4-2");
-    const endDate = moment("2014-4-10");
+    const start = moment("2014-4-1");
+    const end = moment("2014-9-30");
     return(
       <div>
       <DateRangePickerWrapper
           numberOfMonths={1}
+          showClearDates
           reopenPickerOnClearDates
           onOutsideClick
           displayFormat="MMM D, YYYY"
           isOutsideRange={day =>
-              !isInclusivelyAfterDay(day, startDate) ||
-              isInclusivelyAfterDay(day, endDate)
+              !isInclusivelyAfterDay(day, start) ||
+              isInclusivelyAfterDay(day, end)
             }
           onDatesChange = {this.props.onDatesChange}
           startDate={startDate}
