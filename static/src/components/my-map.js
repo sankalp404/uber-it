@@ -43,13 +43,13 @@ class MyMap extends Component{
                 {TOGGLEDRAWING ? <DrawingManager
                     defaultDrawingMode={null}
                     onCirclecomplete={(entity)=>{
-                       console.log(entity.getBounds())
-                       //custom_fucn(entity.getBounds,"circle")
+                      // Todo
                     }}
                     onRectanglecomplete={(entity)=>{
                       if( this.rectangle){
                         this.rectangle.setMap(null);
                       }
+
                       console.log(entity);
                       this.rectangle = entity;
                         console.log(entity.getBounds())

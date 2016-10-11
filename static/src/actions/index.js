@@ -92,7 +92,7 @@ export function fetchDropOffs(bounds){
       const main = state.main;
       const start_day = main.startDate.format('DD/MM/YYYY');
       const end_day = main.endDate.format('DD/MM/YYYY');
-      url = '/dropoffs?start_day='+start_day+'&end_day='+end_day+'&start_hour='+start_hour+'&end_hour='+end_hour+'&start_min='+start_minute+'&end_min='+end_minute+'&lat='+lats.join(',')+'&lng='+longs.join(',');
+      url = '/dropoffs?start_day='+start_day+'&end_day='+end_day+'&start_hour='+start_hour+'&end_hour='+end_hour+'&start_min='+start_minute+'&end_min='+end_minute+'&lats='+lats.join(',')+'&lngs='+longs.join(',');
     }else{
       const state = getState();
       const main = state.main;
@@ -177,7 +177,7 @@ export function fetchPickUps(bounds){
                   showInfo : false,
                   infoContent : ""+index,
                   marker_type : 'pickups',
-                  icon : 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+                  icon : 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   position : {
                     ...item,
                     lat : parseFloat(item["lat"]),

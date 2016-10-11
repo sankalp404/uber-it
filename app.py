@@ -113,7 +113,7 @@ def get_pickup_bounded():
     lats = request.args['lats'].split(",")
     lngs = request.args['lngs'].split(",")
 
-    if len(lats) < 3 or len(lngs) < 3:
+    if len(lats) < 2 or len(lngs) < 2:
         placed = session.query(
             func.count(PickUp.geom).label('count'),
             func.ST_AsText(PickUp.geom)
@@ -122,6 +122,21 @@ def get_pickup_bounded():
                 start_time, end_time
             )
         ).group_by(PickUp.geom).order_by('count desc').limit(50)
+    elif len(lats) == 2 or len(lngs) == 2:
+        placed = session.query(
+            func.count(PickUp.geom).label('count'),
+            func.ST_AsText(PickUp.geom)
+        ).filter(
+            func.ST_Within(
+                PickUp.geom, func.ST_MakeEnvelope(
+                    lngs[1], lats[1], lngs[0], lats[0], 4326
+                )
+            )
+        ).filter(
+            PickUp.time.between(
+                start_time, end_time
+            )
+        ).group_by(PickUp.geom).order_by('count desc').limit(5)
     else:
         # Get the longitude and latitudes in a queriable format
         final = ''
@@ -130,7 +145,6 @@ def get_pickup_bounded():
 
         final += '{0} {1},'.format(lngs[0], lats[0])
 
-        print(final)
         fstr = 'SRID=4326; POLYGON(({0}))'.format(final[:-1])
 
         placed = session.query(
@@ -167,7 +181,7 @@ def get_dropoff_bounded():
     lats = request.args['lats'].split(",")
     lngs = request.args['lngs'].split(",")
 
-    if len(lats) < 3 or len(lngs) < 3:
+    if len(lats) < 2 or len(lngs) < 2:
         placed = session.query(
             func.count(Dropoff.geom).label('count'),
             func.ST_AsText(Dropoff.geom)
@@ -176,6 +190,22 @@ def get_dropoff_bounded():
                 start_time, end_time
             )
         ).group_by(Dropoff.geom).order_by('count desc').limit(50)
+            # Get the longitude and latitudes in a queriable format
+    elif len(lats) == 2 or len(lngs) == 2:
+        placed = session.query(
+            func.count(Dropoff.geom).label('count'),
+            func.ST_AsText(Dropoff.geom)
+        ).filter(
+            func.ST_Within(
+                Dropoff.geom, func.ST_MakeEnvelope(
+                    lngs[1], lats[1], lngs[0], lats[0], 4326
+                )
+            )
+        ).filter(
+            Dropoff.time.between(
+                start_time, end_time
+            )
+        ).group_by(Dropoff.geom).order_by('count desc').limit(5)
     else:
         # Get the longitude and latitudes in a queriable format
         final = ''
@@ -216,7 +246,7 @@ def get_route():
     lats = request.args['lats'].split(",")
     lngs = request.args['lngs'].split(",")
 
-    if len(lats) < 3 or len(lngs) < 3:
+    if len(lats) < 2 or len(lngs) < 2:
         placed = session.query(
             func.ST_AsText(PickUp.geom),
             func.ST_AsText(Dropoff.geom),
@@ -232,6 +262,38 @@ def get_route():
         ).group_by(PickUp.geom).group_by(Dropoff.geom).order_by(
             'count desc'
         ).limit(5)
+    elif len(lats) == 2 or len(lngs) == 2:
+        placed = session.query(
+            func.ST_AsText(PickUp.geom),
+            func.ST_AsText(Dropoff.geom),
+            func.count(PickUp.geom).label('count'),
+        ).join(PickUp.dropoff).filter(
+            # geography filter
+            func.ST_Within(
+                Dropoff.geom, func.ST_MakeEnvelope(
+                    lngs[1], lats[1], lngs[0], lats[0], 4326
+                )
+            )
+        ).filter(
+            # geography filter
+            func.ST_Within(
+                PickUp.geom, func.ST_MakeEnvelope(
+                    lngs[1], lats[1], lngs[0], lats[0], 4326
+                )
+            )
+        ).filter(
+            # dropoff time filter
+            Dropoff.time.between(
+                start_time, end_time
+            )
+        ).filter(
+            # pickup time filter
+            PickUp.time.between(
+                start_time, end_time
+            )
+        ).group_by(PickUp.geom).group_by(Dropoff.geom).order_by(
+            'count desc'
+        ).limit(1)
     else:
         # Get the longitude and latitudes in a queriable format
         final = ''
@@ -247,6 +309,9 @@ def get_route():
             func.ST_AsText(Dropoff.geom),
             func.count(PickUp.geom).label('count'),
         ).join(PickUp.dropoff).filter(
+            # geography filter
+            func.ST_Within(PickUp.geom, fstr)
+        ).filter(
             # geography filter
             func.ST_Within(Dropoff.geom, fstr)
         ).filter(
