@@ -9,8 +9,7 @@ export default class DateRangePickerWrapper extends Component {
     this.state = {
       focusedInput: null,
     };
-    console.log(this.state);
-    console.log(CalendarMonth);
+
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
   }

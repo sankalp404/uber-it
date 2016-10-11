@@ -54203,8 +54203,7 @@
 	    _this.state = {
 	      focusedInput: null
 	    };
-	    console.log(_this.state);
-	    console.log(_reactDates.CalendarMonth);
+	
 	    _this.onDatesChange = _this.onDatesChange.bind(_this);
 	    _this.onFocusChange = _this.onFocusChange.bind(_this);
 	    return _this;
@@ -54298,7 +54297,7 @@
 	  _createClass(MyMap, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      console.log(this.refs.map);
+	      //console.log(this.refs.map);
 	    }
 	  }, {
 	    key: 'render',
@@ -54357,9 +54356,9 @@
 	                _this2.rectangle.setMap(null);
 	              }
 	
-	              console.log(entity);
+	              //console.log(entity);
 	              _this2.rectangle = entity;
-	              console.log(entity.getBounds());
+	              //console.log(entity.getBounds())
 	              //custom_fucn(entity.getBounds,"rectangle")
 	              _this2.props.fetchPickUps(entity.getBounds());
 	              _this2.props.fetchDropOffs(entity.getBounds());

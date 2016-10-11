@@ -8,7 +8,7 @@ class MyMap extends Component{
   }
 
   componentDidMount(){
-    console.log(this.refs.map);
+    //console.log(this.refs.map);
   }
   render(){
     const {filters, markers} = this.props;
@@ -50,9 +50,9 @@ class MyMap extends Component{
                         this.rectangle.setMap(null);
                       }
 
-                      console.log(entity);
+                      //console.log(entity);
                       this.rectangle = entity;
-                        console.log(entity.getBounds())
+                        //console.log(entity.getBounds())
                         //custom_fucn(entity.getBounds,"rectangle")
                         this.props.fetchPickUps(entity.getBounds());
                           this.props.fetchDropOffs(entity.getBounds());
