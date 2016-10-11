@@ -35,7 +35,8 @@ class Root extends Component{
       displayMarkers = displayMarkers.concat(markers.dropoffs);
     }
 
-
+    const startDate = moment("2014-4-2");
+    const endDate = moment("2014-4-10");
     return(
       <div>
       <DateRangePickerWrapper

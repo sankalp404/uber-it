@@ -112,10 +112,10 @@ export function fetchDropOffs(bounds){
       dispatch(fetchedDropOffs({
               dropoffs : response.outputs.map((item,index)=>{
                 return {
-                  title : ""+index,
+                  title : "Ranking:"+index,
                   animation : google.maps.Animation.DROP,
                   showInfo : false,
-                  infoContent : ""+index,
+                  infoContent : "Total Dropoffs:"+item["count"],
                   marker_type : 'dropoffs',
                   icon :'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
                   position : {
@@ -172,10 +172,10 @@ export function fetchPickUps(bounds){
       dispatch(fetchedPickups({
               pickups : response.outputs.map((item,index)=>{
                 return {
-                  title : ""+index,
+                  title : "Ranking:"+index,
                   animation : google.maps.Animation.DROP,
                   showInfo : false,
-                  infoContent : ""+index,
+                  infoContent : "Total Pickups"+item["count"],
                   marker_type : 'pickups',
                   icon : 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                   position : {
