@@ -45,3 +45,22 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+
+venv
+*.pyc
+staticfiles
+.env
+db.sqlite3
+
+/venv
+
+/node_modules
+npm-debug.log
+
+# IntelliJ
+*.iml
+/.idea
+
+/rawData
