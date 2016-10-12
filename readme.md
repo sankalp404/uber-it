@@ -89,4 +89,4 @@ I soon realized that to do the kind of queries I was I needed something more pow
 - Considering the time constraint it seemed to be a great alternative at first, but as my code grew, the side-effects of a third-party  wrapper imposed considerable roadblocks.
 
 ### Special Thanks:
-A special thanks to the AirBnB team for making a timely fix in their react-dates plugin and to an array of global developers online whose hair I have pulled for the last week
+A special thanks to the AirBnB team for making a timely fix in their [react-dates plugin](https://github.com/airbnb/react-dates)
