@@ -29,21 +29,9 @@ Now that you have initialized the database with tables, populate them using the 
 > python db_create.py
 
 > python app.py
-=======
->> virtualenv venv
-
->> venv\Scripts\activate
-
->> python create_delete_db.py
-
-Now that you have initialized the database with tables, populate them using the raw data
-
->> python db_create.py
-
->> python app.py
 
 
-Next we will install the Node modules.
+Next, we will install the Node modules.
 
 $ npm install
 
