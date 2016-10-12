@@ -1,6 +1,6 @@
 # uber-it
 
-An app that
+A web app that also users to explore how Uber is changing the cab industry and why the New Yorkers love it!
 
 ## Requirements
 - Python 2.7
@@ -47,11 +47,13 @@ My immediate plan of action was to write the backend using python and wire it up
 
 I began by brushing up on my python. And, to get a feel for the data I was working with, I wrote a script with sqlite3 to import the csv files into a database. I, then did a few queries in a DB visualizer and quickly found out that most pickups and dropoffs happen to be the city's two busy airports. Ahaa.. no surprise there but I could still get some interesting facts from these tables.
 
-Next, I made myself familiar with Google Map's JS APIv3. After that, I took couple courses on react and redux on Udemy. Just as I was getting done with react, I found a neat video series by the Google Developer's team on their api. This, gave me several ideas of how I would like a person to interact with the app. I
+Next, I made myself familiar with Google Map's JS APIv3. After that, I took couple courses on react and redux on Udemy. Just as I was getting done with react, I found a neat video series by the Google Developer's team on their api. This, gave me several ideas of how I would like a person to interact with the app. I started by designing a demo of how the app will look using [draw.io](https://www.draw.io/)
 
-The app would start with five custom markers, with one of them showing its info-window(The info-window will show the street view of that location using its geolocation and interesting piece of information about that place). These markers will shuffle-show their info windows till the time a person takes over. The person will have the option to filter by date and time, pickups/dropoffs, pickup/dropoff heatmaps and common routes. Heatmaps will show on the entire map for the entire dataset using a weighted table. Pickups/dropoffs and best route will be shown within the area drawn by the user. The app will have 2 drawing options: rectangle and ploygon (may be a circle?). Once an overlay is drawn, the 5 pickups and 5 dropoffs markers will appear on the screen. ...
-//todo
+The app would start with five custom markers, with one of them showing its info-window(The info-window will show the street view of that location using its geolocation and interesting piece of information about that place). These markers will shuffle-show their info windows till the time a person takes over.
 
+The person will then have an option to filter by date and time, pickups/dropoffs, pickup/dropoff heatmaps and common routes. Heatmaps will be show on the entire map using the complete dataset in the form of a weighted table. Pickups/dropoffs and common route will be shown within the area drawn by the user. The app will have 2 drawing options: rectangle and ploygon (may be a circle?). Once an overlay is drawn, the app would zoom in on the area and show the 5 most pickups and dropoffs for the area along with a single most common route within the confines. The markers withe the most pickups and  dropoffs will have their info-windows open by default and look similar to the previously mentioned custom markers. There will also be a single most common route, defined by markers A and B along with its direction.
+
+With my design and requirements formalized, I went back to actually building the app. Next step, backend..
 
 # Design Decisions
 
@@ -72,14 +74,6 @@ This was accomplished by finding the most common pickup/dropoff pairs for an are
 /allpickups and /alldropoffs..This would return to me a weighted table for each that would be used in creating heatmaps.
 
 I soon realized that to do the kind of queries I was I needed something more powerful that could assist me querying data involving latitudes and longitudes. Enter PostGIS, a spatial database extender for PostgreSQL. It adds support for geographic objects allowing location queries to be run easily. Using GeoAlchemy2, an extension for SQLAlchemy, I was able to offload a lot of my work by creating a spatial database using postgis.
-
-//todo
-
-
-
-
-
-
 
 ## Todos
 - Wire up the front end for heatmaps. I have a backend API available to support such request.
