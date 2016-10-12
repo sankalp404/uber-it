@@ -17,6 +17,7 @@ An app that
 ```
 CREATE EXTENSION postgis;
 ```
+<<<<<<< HEAD
 > virtualenv venv
 
 > venv\Scripts\activate
@@ -28,6 +29,19 @@ Now that you have initialized the database with tables, populate them using the 
 > python db_create.py
 
 > python app.py
+=======
+>> virtualenv venv
+
+>> venv\Scripts\activate
+
+>> python create_delete_db.py
+
+Now that you have initialized the database with tables, populate them using the raw data
+
+>> python db_create.py
+
+>> python app.py
+>>>>>>> cba7f7232b2511a7af35f49e5a7d90534a80b100
 
 Next we will install the Node modules.
 
@@ -36,6 +50,7 @@ $ npm install
 $ npm start
 
 - You are now ready to explore the app at http://localhost:5000
+<<<<<<< HEAD
 
 # Approach
 
@@ -58,3 +73,5 @@ From the onset, I wanted to create an extremely intutive and user-friendly app. 
 
 ### Special Thanks:
 A special thanks to the AirBnB team for making a timely fix in their react-dates plugin and to an array of global developers online whose hair I have pulled for the last week
+=======
+>>>>>>> cba7f7232b2511a7af35f49e5a7d90534a80b100
