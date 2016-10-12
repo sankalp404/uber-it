@@ -60,7 +60,7 @@ class MyMap extends Component{
                     defaultOptions={{
                         drawingControl: true,
                         drawingControlOptions: {
-                          position: google.maps.ControlPosition.TOP_RIGHT,
+                          position: google.maps.ControlPosition.TOP_CENTER,
                           drawingModes: [
                             google.maps.drawing.OverlayType.POLYGON,
                             google.maps.drawing.OverlayType.RECTANGLE,
