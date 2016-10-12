@@ -7,15 +7,11 @@ export function mainReducer(state= {
     pickups : [],
     dropoffs : []
   },
-  startDate : moment("2014-4-1"),
-  endDate : moment("2014-5-30")
+  startDate : moment("2014-7-21"),
+  endDate : moment("2014-8-14")
 },action){
   switch(action.type){
-    // case 'FETCHING_MARKERS' :
-    //   return {
-    //     ...state,
-    //     markers : {}
-    //   }
+
     case 'FETCHED_MARKERS' :
       return {
         ...state,
@@ -23,14 +19,6 @@ export function mainReducer(state= {
           ...action.payload.markers
         }
       };
-    // case 'FETCHING_PICKUPS' :
-    //   return {
-    //     ...state,
-    //     markers : {
-    //       ...state.markers,
-    //       pickups : []
-    //     }
-    //   }
     case 'FETCHED_PICKUPS' :
       return {
         ...state,
@@ -103,7 +91,8 @@ export function filterReducer(state= {
   ...filterReducerInitialState,
   TOGGLEDRAWING : true,
   SHOWPICKUPS : true,
-  SHOWDROPOFFS : true
+  SHOWDROPOFFS : true,
+  AM: true,
 },action){
   switch(action.type){
     case 'SET_FILTER' :

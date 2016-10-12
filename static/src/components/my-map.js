@@ -21,7 +21,7 @@ class MyMap extends Component{
           googleMapElement={
             <GoogleMap
               ref={(map) => console.log(map)}
-              defaultZoom={14}
+              defaultZoom={12}
               defaultCenter={{ lat:40.748433, lng: -73.985656 }}
 
               >
@@ -43,26 +43,33 @@ class MyMap extends Component{
                 {TOGGLEDRAWING ? <DrawingManager
                     defaultDrawingMode={null}
                     onCirclecomplete={(entity)=>{
-                      // Todo
+                      // Todo..
                     }}
                     onRectanglecomplete={(entity)=>{
                       if( this.rectangle){
                         this.rectangle.setMap(null);
                       }
-
-                      //console.log(entity);
                       this.rectangle = entity;
-                        //console.log(entity.getBounds())
-                        //custom_fucn(entity.getBounds,"rectangle")
+                      this.props.fetchPickUps(entity.getBounds());
+                      this.props.fetchDropOffs(entity.getBounds());
+                    }}
+                    onpolygoncomplete={(entity)=>{
+                      if( this.polygon){
+                        this.polygon.setMap(null);
+                      }
+                        console.log("sankalp");
+                        // console.log(entity);
+                        this.polygon = entity;
                         this.props.fetchPickUps(entity.getBounds());
-                          this.props.fetchDropOffs(entity.getBounds());
+                        this.props.fetchDropOffs(entity.getBounds());
                     }}
                     defaultOptions={{
                         drawingControl: true,
                         drawingControlOptions: {
                           position: google.maps.ControlPosition.TOP_CENTER,
                           drawingModes: [
-                            google.maps.drawing.OverlayType.POLYGON,
+                            //google.maps.drawing.OverlayType.POLYGON,
+                            // Will come back to this.
                             google.maps.drawing.OverlayType.RECTANGLE,
                           ],
                         }

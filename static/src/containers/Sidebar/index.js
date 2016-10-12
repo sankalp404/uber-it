@@ -58,28 +58,28 @@ class SideBanner extends Component{
 
                 <Flex right={
                   <ToggleButton
-                      value={  false }
+                      value={  false || SHOWPICKUPHEATMAP }
                       onToggle={()=>this.handleClick(filterConstants['SHOWPICKUPHEATMAP'])} />}
                       left={  <div className="filterLabel">Show heatmap for Pickups</div>
                 }/>
 
                 <Flex right={
                   <ToggleButton
-                    value={  false }
+                    value={  false || SHOWDROPOFFHEATMAP}
                     onToggle={()=>this.handleClick(filterConstants['SHOWDROPOFFHEATMAP'])} />}
                     left={  <div className="filterLabel">Show heatmap for Dropoffs</div>
               }/>
 
               <Flex right={
                 <ToggleButton
-                  value={  false }
+                  value={  false || SHOWCOMMONROUTES}
                   onToggle={()=>this.handleClick(filterConstants['SHOWCOMMONROUTES'])} />}
                   left={  <div className="filterLabel">Show common routes</div>
             }/>
 
               <Flex right={
                 <ToggleButton
-                  value={  AM }
+                  value={ AM }
                   onToggle={()=>this.handleClick(filterConstants['AM'])} />}
                   left={
                     <div className="filterLabel">AM</div>

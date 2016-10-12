@@ -103,8 +103,6 @@
 	
 	// Redux
 	
-	// import SideBanner from './components/side-banner';
-	
 	
 	var App = function (_Component) {
 	  _inherits(App, _Component);
@@ -51809,29 +51807,17 @@
 	      pickups: [],
 	      dropoffs: []
 	    },
-	    startDate: (0, _moment2.default)("2014-4-1"),
-	    endDate: (0, _moment2.default)("2014-5-30")
+	    startDate: (0, _moment2.default)("2014-7-21"),
+	    endDate: (0, _moment2.default)("2014-8-14")
 	  };
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    // case 'FETCHING_MARKERS' :
-	    //   return {
-	    //     ...state,
-	    //     markers : {}
-	    //   }
+	
 	    case 'FETCHED_MARKERS':
 	      return _extends({}, state, {
 	        markers: _extends({}, action.payload.markers)
 	      });
-	    // case 'FETCHING_PICKUPS' :
-	    //   return {
-	    //     ...state,
-	    //     markers : {
-	    //       ...state.markers,
-	    //       pickups : []
-	    //     }
-	    //   }
 	    case 'FETCHED_PICKUPS':
 	      return _extends({}, state, {
 	        markers: _extends({}, state.markers, {
@@ -51889,7 +51875,8 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _extends({}, filterReducerInitialState, {
 	    TOGGLEDRAWING: true,
 	    SHOWPICKUPS: true,
-	    SHOWDROPOFFS: true
+	    SHOWDROPOFFS: true,
+	    AM: true
 	  });
 	  var action = arguments[1];
 	
@@ -52014,7 +52001,7 @@
 	    var url = null;
 	    dispatch(fetchingDropOffs());
 	    if (bounds) {
-	      console.log(bounds.getNorthEast());
+	      //console.log(bounds.getNorthEast());
 	
 	      var northEast = bounds.getNorthEast();
 	      var southWest = bounds.getSouthWest();
@@ -52049,7 +52036,7 @@
 	    return (0, _isomorphicFetch2.default)(url).then(function (response) {
 	      return response.json();
 	    }).then(function (response) {
-	      console.log(response);
+	      //console.log(response);
 	      dispatch(fetchedDropOffs({
 	        dropoffs: response.outputs.map(function (item, index) {
 	          return {
@@ -52075,7 +52062,7 @@
 	    dispatch(fetchingPickups());
 	    var url = null;
 	    if (bounds) {
-	      console.log(bounds.getNorthEast());
+	      //  console.log(bounds.getNorthEast());
 	
 	      var northEast = bounds.getNorthEast();
 	      var southWest = bounds.getSouthWest();
@@ -52110,7 +52097,7 @@
 	    return (0, _isomorphicFetch2.default)(url).then(function (response) {
 	      return response.json();
 	    }).then(function (response) {
-	      console.log(response);
+	      //  console.log(response);
 	      dispatch(fetchedPickups({
 	        pickups: response.outputs.map(function (item, index) {
 	          return {
@@ -53598,7 +53585,7 @@
 	            'Enable Drawing'
 	          ) }),
 	        _react2.default.createElement(Flex, { right: _react2.default.createElement(_reactToggleButton2.default, {
-	            value: false,
+	            value: false || SHOWPICKUPHEATMAP,
 	            onToggle: function onToggle() {
 	              return _this3.handleClick(_actions.filterConstants['SHOWPICKUPHEATMAP']);
 	            } }),
@@ -53608,7 +53595,7 @@
 	            'Show heatmap for Pickups'
 	          ) }),
 	        _react2.default.createElement(Flex, { right: _react2.default.createElement(_reactToggleButton2.default, {
-	            value: false,
+	            value: false || SHOWDROPOFFHEATMAP,
 	            onToggle: function onToggle() {
 	              return _this3.handleClick(_actions.filterConstants['SHOWDROPOFFHEATMAP']);
 	            } }),
@@ -53618,7 +53605,7 @@
 	            'Show heatmap for Dropoffs'
 	          ) }),
 	        _react2.default.createElement(Flex, { right: _react2.default.createElement(_reactToggleButton2.default, {
-	            value: false,
+	            value: false || SHOWCOMMONROUTES,
 	            onToggle: function onToggle() {
 	              return _this3.handleClick(_actions.filterConstants['SHOWCOMMONROUTES']);
 	            } }),
@@ -54317,7 +54304,7 @@
 	            ref: function ref(map) {
 	              return console.log(map);
 	            },
-	            defaultZoom: 14,
+	            defaultZoom: 12,
 	            defaultCenter: { lat: 40.748433, lng: -73.985656 }
 	
 	          },
@@ -54349,25 +54336,33 @@
 	          TOGGLEDRAWING ? _react2.default.createElement(_DrawingManager2.default, {
 	            defaultDrawingMode: null,
 	            onCirclecomplete: function onCirclecomplete(entity) {
-	              // Todo
+	              // Todo..
 	            },
 	            onRectanglecomplete: function onRectanglecomplete(entity) {
 	              if (_this2.rectangle) {
 	                _this2.rectangle.setMap(null);
 	              }
-	
-	              //console.log(entity);
 	              _this2.rectangle = entity;
-	              //console.log(entity.getBounds())
-	              //custom_fucn(entity.getBounds,"rectangle")
+	              _this2.props.fetchPickUps(entity.getBounds());
+	              _this2.props.fetchDropOffs(entity.getBounds());
+	            },
+	            onpolygoncomplete: function onpolygoncomplete(entity) {
+	              if (_this2.polygon) {
+	                _this2.polygon.setMap(null);
+	              }
+	              console.log("sankalp");
+	              // console.log(entity);
+	              _this2.polygon = entity;
 	              _this2.props.fetchPickUps(entity.getBounds());
 	              _this2.props.fetchDropOffs(entity.getBounds());
 	            },
 	            defaultOptions: {
 	              drawingControl: true,
 	              drawingControlOptions: {
-	                position: google.maps.ControlPosition.TOP_RIGHT,
-	                drawingModes: [google.maps.drawing.OverlayType.POLYGON, google.maps.drawing.OverlayType.RECTANGLE]
+	                position: google.maps.ControlPosition.TOP_CENTER,
+	                drawingModes: [google.maps.drawing.OverlayType.POLYGON,
+	                // Will come back to this.
+	                google.maps.drawing.OverlayType.RECTANGLE]
 	              }
 	            }
 	          }) : null

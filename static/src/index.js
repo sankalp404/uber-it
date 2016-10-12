@@ -11,7 +11,6 @@ import store, {history} from "./store";
 
 
 import TopBanner from './components/top-banner';
-// import SideBanner from './components/side-banner';
 import SideBanner from './containers/Sidebar';
 import Root from './containers/Root';
 

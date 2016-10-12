@@ -26,7 +26,7 @@ class Root extends Component{
 
   render(){
     const {markers, startDate, endDate , filters} = this.props;
-      const {TOGGLEDRAWING, SHOWPICKUPS, SHOWDROPOFFS} = filters;
+    const {TOGGLEDRAWING, SHOWPICKUPS, SHOWDROPOFFS} = filters;
     let displayMarkers = [];
     if(SHOWPICKUPS){
       displayMarkers = displayMarkers.concat(markers.pickups);

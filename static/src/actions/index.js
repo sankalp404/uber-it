@@ -76,7 +76,7 @@ export function fetchDropOffs(bounds){
     let url = null ;
       dispatch(fetchingDropOffs());
     if(bounds){
-      console.log(bounds.getNorthEast());
+      //console.log(bounds.getNorthEast());
 
       const northEast = bounds.getNorthEast();
       const southWest = bounds.getSouthWest();
@@ -108,7 +108,7 @@ export function fetchDropOffs(bounds){
 
     //past pickup url
     return fetch(url).then(response=>response.json()).then(response=>{
-      console.log(response);
+      //console.log(response);
       dispatch(fetchedDropOffs({
               dropoffs : response.outputs.map((item,index)=>{
                 return {
@@ -136,7 +136,7 @@ export function fetchPickUps(bounds){
     dispatch(fetchingPickups());
     let url = null;
     if(bounds){
-      console.log(bounds.getNorthEast());
+    //  console.log(bounds.getNorthEast());
 
       const northEast = bounds.getNorthEast();
       const southWest = bounds.getSouthWest();
@@ -168,7 +168,7 @@ export function fetchPickUps(bounds){
 
     //past pickup url
     return fetch(url).then(response=>response.json()).then(response=>{
-      console.log(response);
+    //  console.log(response);
       dispatch(fetchedPickups({
               pickups : response.outputs.map((item,index)=>{
                 return {
