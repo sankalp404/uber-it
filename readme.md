@@ -55,6 +55,23 @@ The app would start with five custom markers, with one of them showing its info-
 
 # Design Decisions
 
+For my backend I decided to use the Flask web framework. Flask is a micro-framework with little no dependencies to external libraries while being extremely extensible at the same time. Since, Flask does not include a database abstraction layer by default, it is up to the programmer to choose different libraries for the project and customize to his or her liking.
+
+So, using flask I was able to setup up web service which would return me JSON data. I was initially using sqlite for my database but since Heroku supports postgres, I knew I had to change my chosen database. I then decided to use SQLAlchemy which is a Object Relational Mapper, where classes can be mapped to the database in open ended, multiple way - allowing the object model and database schema to develop in a cleanly decoupled way from the beginning.
+
+Using this, I was able to define my model and store the csv data into the database. I was initially using the model of trips, pickups and dropoffs and was storing lat, lng in separate columns for faster queries. This was however, not very effecient for what I was trying to accomplish. So, my web service were routes were split something like this:
+
+/pickups: The 5 most pickups for a selected region (default: 5 most pickups for the entire area)
+
+/dropoffs: This used the same idea as above but for dropoffs
+
+/route: The most common route for a given selection. (default: 5 most common routes in the entire map).
+
+This was accomplished by finding the most common pickup/dropoff pairs for an area. Even though this approach worked, there can be more complex ways of getting the common route but for the scope of this project, we will keep it limited to this.
+
+/allpickups and /alldropoffs..This would return to me a weighted table for each that would be used in creating heatmaps.
+
+I soon realized that to do the kind of queries I was I needed something more powerful that could assist me querying data involving latitudes and longitudes. Enter PostGIS, a spatial database extender for PostgreSQL. It adds support for geographic objects allowing location queries to be run easily. Using GeoAlchemy2, an extension for SQLAlchemy, I was able to offload a lot of my work by creating a spatial database using postgis.
 
 //todo
 
