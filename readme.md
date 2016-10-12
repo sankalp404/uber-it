@@ -17,17 +17,22 @@ An app that
 ```
 CREATE EXTENSION postgis;
 ```
->>> virtualenv venv
->>> venv\Scripts\activate
->>> python create_delete_db.py
+>> virtualenv venv
 
-## Now that you have initialized the database with tables populate it using the raw data
->>> python db_create.py
->>> python app.py
+>> venv\Scripts\activate
 
-## Next we will install the Node modules.
+>> python create_delete_db.py
+
+Now that you have initialized the database with tables, populate them using the raw data
+
+>> python db_create.py
+
+>> python app.py
+
+Next we will install the Node modules.
 
 $ npm install
+
 $ npm start
 
-##  You are now ready to explore the app at http://localhost:5000
+- You are now ready to explore the app at http://localhost:5000
