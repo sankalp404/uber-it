@@ -54360,7 +54360,8 @@
 	              drawingControl: true,
 	              drawingControlOptions: {
 	                position: google.maps.ControlPosition.TOP_CENTER,
-	                drawingModes: [google.maps.drawing.OverlayType.POLYGON,
+	                drawingModes: [
+	                //google.maps.drawing.OverlayType.POLYGON,
 	                // Will come back to this.
 	                google.maps.drawing.OverlayType.RECTANGLE]
 	              }
